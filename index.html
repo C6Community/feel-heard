@@ -8,81 +8,95 @@
     html, body {
       height: 100%;
       margin: 0;
-      font-family: sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(to right, #2c3e50, #4ca1af);
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       color: white;
       text-align: center;
+      padding: 1em;
     }
     #container {
-      max-width: 300px;
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5em;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.2em;
     }
     button {
       background: white;
       color: #2c3e50;
       border: none;
-      padding: 1em 2em;
-      font-size: 1.2em;
-      border-radius: 1em;
+      padding: 0.8em 1.5em;
+      font-size: 1.1em;
+      border-radius: 1.5em;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
     button:hover {
-      background: #eee;
-    }
-    #message {
-      margin-top: 1.5em;
-      font-size: 1.1em;
-      min-height: 2em;
+      background: #ddd;
     }
     #carousel {
-      margin-top: 2em;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
       padding: 1em;
       border-radius: 1em;
-      width: 90%;
+      width: 100%;
     }
     .carousel-link {
       display: none;
-      font-size: 1em;
-      color: white;
+      font-size: 1.1em;
+      margin-bottom: 0.5em;
+      color: #ccefff;
       text-decoration: underline;
       cursor: pointer;
     }
     .carousel-link.active {
       display: block;
-      animation: fadeIn 0.8s ease-in-out;
+      animation: fadeIn 0.6s ease-in-out;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
     form {
-      margin-top: 2em;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
       padding: 1em;
       border-radius: 1em;
+      width: 100%;
     }
     input, textarea {
-      width: 90%;
+      width: 100%;
       margin: 0.5em 0;
-      padding: 0.5em;
+      padding: 0.7em;
       border-radius: 0.5em;
       border: none;
       font-size: 1em;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
     }
     .note {
       font-size: 0.8em;
-      color: #ddd;
+      color: #ccc;
+    }
+    #message {
+      font-size: 1.1em;
+      min-height: 2em;
     }
   </style>
 </head>
 <body>
   <div id="container">
-    <h5>You Matter</h>
+    <h1>You Matter</h1>
+
     <div id="carousel">
       <div id="carouselLinks">
         <div class="carousel-link active" onclick="window.open('https://reddit.com/r/C6_Project', '_blank')">Reddit: r/C6_Project</div>
@@ -96,8 +110,8 @@
 
     <form action="https://formspree.io/f/xjkwnvoy" method="POST" onsubmit="addMetadata()">
       <h3>Report Therapist Securely</h3>
-      <input type="text" name="therapistName" placeholder="Therapist's name" required><br>
-      <textarea name="details" rows="4" placeholder="Optional details... (kept private)"></textarea><br>
+      <input type="text" name="therapistName" placeholder="Therapist's name" required>
+      <textarea name="details" rows="4" placeholder="Optional details... (kept private)"></textarea>
       <input type="hidden" name="timestamp" id="timestamp">
       <input type="hidden" name="userAgent" id="userAgent">
       <input type="hidden" name="platform" id="platform">
@@ -107,6 +121,14 @@
   </div>
 
   <script>
+    const affirmations = [
+      "I hear you. And your voice matters.",
+      "You're not alone in this.",
+      "What you feel is valid.",
+      "Even if no one else understands, I do.",
+      "You’re allowed to be exactly as you are.",
+      "You’re strong for carrying this."
+    ];
 
     function feelHeard() {
       const msg = affirmations[Math.floor(Math.random() * affirmations.length)];

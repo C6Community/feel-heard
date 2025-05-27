@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feel Heard</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to right, #2c3e50, #4ca1af);
+      color: white;
+      text-align: center;
+    }
+    #container {
+      max-width: 300px;
+    }
+    button {
+      background: white;
+      color: #2c3e50;
+      border: none;
+      padding: 1em 2em;
+      font-size: 1.2em;
+      border-radius: 1em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    button:hover {
+      background: #eee;
+    }
+    #message {
+      margin-top: 1.5em;
+      font-size: 1.1em;
+      min-height: 2em;
+    }
+    form {
+      margin-top: 2em;
+      background: rgba(255,255,255,0.1);
+      padding: 1em;
+      border-radius: 1em;
+    }
+    input, textarea {
+      width: 90%;
+      margin: 0.5em 0;
+      padding: 0.5em;
+      border-radius: 0.5em;
+      border: none;
+      font-size: 1em;
+    }
+    .note {
+      font-size: 0.8em;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>You Matter</h1>
+    <button onclick="feelHeard()">Press to Feel Heard</button>
+  
+    <div id="message"></div>
+
+    <form action="https://formspree.io/f/xjkwnvoy" method="POST" onsubmit="addMetadata()">
+      <h3>Report Therapist Securely</h3>
+      <input type="text" name="therapistName" placeholder="Therapist's name" required><br>
+      <textarea name="details" rows="4" placeholder="Optional details... (kept private)"></textarea><br>
+      <input type="hidden" name="timestamp" id="timestamp">
+      <input type="hidden" name="userAgent" id="userAgent">
+      <input type="hidden" name="platform" id="platform">
+      <button type="submit">Submit Report</button>
+      <div class="note">Submissions are encrypted and sent securely.</div>
+    </form>
+  </div>
+
+  <script>
+    const affirmations = [
+      "I hear you. And your voice matters.",
+      "You're not alone in this.",
+      "What you feel is valid.",
+      "Even if no one else understands, I do.",
+      "You’re allowed to be exactly as you are.",
+      "You’re strong for carrying this."
+    ];
+
+    function feelHeard() {
+      const msg = affirmations[Math.floor(Math.random() * affirmations.length)];
+      document.getElementById("message").innerText = msg;
+    }
+
+    function addMetadata() {
+      document.getElementById("timestamp").value = new Date().toISOString();
+      document.getElementById("userAgent").value = navigator.userAgent;
+      document.getElementById("platform").value = navigator.platform;
+    }
+  </script>
+</body>
+</html>

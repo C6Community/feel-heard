@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feel Heard</title>
+  <title>C6 Project</title>
   <style>
     html, body {
       height: 100%;
@@ -38,6 +38,28 @@
       font-size: 1.1em;
       min-height: 2em;
     }
+    #carousel {
+      margin-top: 2em;
+      background: rgba(255,255,255,0.1);
+      padding: 1em;
+      border-radius: 1em;
+      width: 90%;
+    }
+    .carousel-link {
+      display: none;
+      font-size: 1em;
+      color: white;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .carousel-link.active {
+      display: block;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     form {
       margin-top: 2em;
       background: rgba(255,255,255,0.1);
@@ -60,9 +82,16 @@
 </head>
 <body>
   <div id="container">
-    <h1>You Matter</h1>
-    <button onclick="feelHeard()">Press to Feel Heard</button>
-  
+    <h5>You Matter</h>
+    <div id="carousel">
+      <div id="carouselLinks">
+        <div class="carousel-link active" onclick="window.open('https://reddit.com/r/C6_Project', '_blank')">Reddit: r/C6_Project</div>
+        <div class="carousel-link" onclick="window.open('https://formspree.io', '_blank')">Formspree</div>
+        <div class="carousel-link" onclick="window.open('https://example.com', '_blank')">Example Site</div>
+      </div>
+      <button onclick="nextLink()">C6</button>
+    </div>
+
     <div id="message"></div>
 
     <form action="https://formspree.io/f/xjkwnvoy" method="POST" onsubmit="addMetadata()">
@@ -78,14 +107,6 @@
   </div>
 
   <script>
-    const affirmations = [
-      "I hear you. And your voice matters.",
-      "You're not alone in this.",
-      "What you feel is valid.",
-      "Even if no one else understands, I do.",
-      "You’re allowed to be exactly as you are.",
-      "You’re strong for carrying this."
-    ];
 
     function feelHeard() {
       const msg = affirmations[Math.floor(Math.random() * affirmations.length)];
@@ -96,6 +117,14 @@
       document.getElementById("timestamp").value = new Date().toISOString();
       document.getElementById("userAgent").value = navigator.userAgent;
       document.getElementById("platform").value = navigator.platform;
+    }
+
+    let currentLink = 0;
+    const links = document.querySelectorAll('.carousel-link');
+    function nextLink() {
+      links[currentLink].classList.remove('active');
+      currentLink = (currentLink + 1) % links.length;
+      links[currentLink].classList.add('active');
     }
   </script>
 </body>
